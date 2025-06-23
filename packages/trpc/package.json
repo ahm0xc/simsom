@@ -10,8 +10,11 @@
     "./trpc": "./src/trpc.ts",
     "./root": "./src/root.ts"
   },
-  "scripts": {},
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
+    "@repo/typescript-config": "workspace:*",
     "superjson": "^2.2.2",
     "zod": "^3.22.4"
   },

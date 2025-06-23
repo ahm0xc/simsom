@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "dev": "turbo dev",
-    "check": "turbo check",
-    "typecheck": "bunx --bun tsc",
+    "ci": "npm run typecheck && npm run fmt:check",
+    "typecheck": "turbo typecheck",
     "fmt": "prettier --write \"apps/**/*.{ts,tsx,js,jsx,mdx}\" \"packages/**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "fmt:check": "prettier --check \"apps/**/*.{ts,tsx,js,jsx,mdx}\" \"packages/**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "prepare": "husky"

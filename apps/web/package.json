@@ -5,13 +5,13 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "check": "npm run check-types",
     "dev": "next dev --turbopack",
     "preview": "next build && next start",
     "start": "next start",
-    "check-types": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@repo/typescript-config": "workspace:*",
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-scroll-area": "^1.2.3",
