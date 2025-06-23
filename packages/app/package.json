@@ -1,0 +1,13 @@
+{
+  "name": "@repo/app",
+  "version": "0.0.1",
+  "exports": {
+    "./config": "./src/config.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/typescript-config": "workspace:*"
+  }
+}

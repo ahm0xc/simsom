@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 
+import { appConfig } from "@repo/app/config";
 import { GeistSans } from "geist/font/sans";
 
 import "~/styles/globals.css";
 import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
-  title: "Simsom",
-  description: "A simple social media platform",
+  title: appConfig.name,
+  description: appConfig.description,
 };
 
 export default function RootLayout({
