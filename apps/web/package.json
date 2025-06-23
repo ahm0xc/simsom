@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@repo/app": "workspace:*",
+    "@repo/config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-label": "^2.1.2",

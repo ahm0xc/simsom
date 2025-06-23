@@ -1,0 +1,18 @@
+{
+  "$schema": "./app.schema.json",
+  "name": "SimSom",
+  "description": "SimSom is a social media platform that allows you to share your thoughts and ideas with the world.",
+  "tagline": "Do small, do often",
+  "author": "ahm0xc",
+  "emails": {
+    "primary": "simsom@gmail.com",
+    "support": "support@simsom.com"
+  },
+  "urls": {},
+  "native": {
+    "name": "SimSom",
+    "slug": "simsom",
+    "version": "1.0.0",
+    "scheme": "simsom"
+  }
+}

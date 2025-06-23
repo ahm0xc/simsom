@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { appConfig } from "@repo/app/config";
+import { appConfig } from "@repo/config/app";
 import { GeistSans } from "geist/font/sans";
 
 import "~/styles/globals.css";

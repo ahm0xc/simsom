@@ -1,8 +1,9 @@
 {
-  "name": "@repo/app",
+  "name": "@repo/config",
   "version": "0.0.1",
   "exports": {
-    "./config": "./src/config.ts"
+    "./app": "./src/app.ts",
+    "./app.json": "./src/app.json"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
