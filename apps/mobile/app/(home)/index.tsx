@@ -1,5 +1,6 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
+import Text from "~/components/ui/text";
 import { api } from "~/trpc/client";
 
 export default function HomeScreen() {
@@ -7,10 +8,10 @@ export default function HomeScreen() {
 
   return (
     <View className="flex-1 justify-center items-center">
-      <Text className="text-red-500">
-        Edit app/index.tsx to edit this screen.
+      <Text font="sans" className="text-red-500 text-3xl">
+        Home
       </Text>
-      <Text className="text-blue-500">
+      <Text font="serif" className="text-blue-500">
         Greeting:
         {data?.greeting}
       </Text>
