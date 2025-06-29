@@ -6,7 +6,7 @@ import { TRPCProvider } from "~/trpc/provider";
 export default function RootLayout() {
   return (
     <TRPCProvider>
-      <Stack />
+      <Stack screenOptions={{ headerShown: false }} />
     </TRPCProvider>
   );
 }

@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 
 import { api } from "~/trpc/client";
 
-export default function Index() {
+export default function HomeScreen() {
   const { data } = api.example.hello.useQuery({ text: "client" });
 
   return (
