@@ -53,13 +53,9 @@ export default function HomeLayout() {
           justifyContent: "center",
         },
         tabBarStyle: {
-          backgroundColor: "#fff",
           height: 90,
           borderTopWidth: 1,
-          borderTopColor: "#e5e5e5",
         },
-        tabBarActiveTintColor: "#8b5cf6",
-        tabBarInactiveTintColor: "#525252",
       }}
     >
       {TABS.map((tab) => (

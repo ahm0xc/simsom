@@ -1,6 +1,8 @@
 import React from "react";
 
-import { Text, View } from "react-native";
+import { View } from "react-native";
+
+import Text from "~/components/ui/text";
 
 export default function ChatsScreens() {
   return (
