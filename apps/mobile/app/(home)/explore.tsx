@@ -9,7 +9,7 @@ export default function ExploreScreen() {
     <View className="flex-1">
       <ScrollView>
         <Text>ExploreScreen</Text>
-        <Text className="text-lg">
+        <Text className="text-2xl">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi
           aliquam laboriosam, harum animi consequatur voluptatibus aperiam sint
           magnam fugiat impedit possimus! Atque facilis voluptates, pariatur,

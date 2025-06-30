@@ -1,3 +1,7 @@
+import React from "react";
+
+import { Pressable } from "react-native";
+
 import { Tabs } from "expo-router";
 import { scale } from "react-native-size-matters";
 
@@ -56,6 +60,16 @@ export default function HomeLayout() {
           height: 90,
           borderTopWidth: 1,
         },
+        tabBarHideOnKeyboard: true,
+        tabBarVisibilityAnimationConfig: {
+          hide: {
+            animation: "spring",
+          },
+          show: {
+            animation: "spring",
+          },
+        },
+        tabBarButton: (props) => <CustomTabButton {...props} />,
       }}
     >
       {TABS.map((tab) => (
@@ -72,3 +86,17 @@ export default function HomeLayout() {
     </Tabs>
   );
 }
+
+const CustomTabButton = React.forwardRef<any, any>((props, ref) => {
+  const { children, ...restProps } = props;
+  return (
+    <Pressable
+      ref={ref}
+      {...restProps}
+      android_ripple={{ color: "transparent" }}
+      style={({ pressed }) => [props.style, pressed && { opacity: 0.7 }]}
+    >
+      {children}
+    </Pressable>
+  );
+});

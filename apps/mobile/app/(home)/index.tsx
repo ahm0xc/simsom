@@ -1,6 +1,6 @@
 import React from "react";
 
-import { View } from "react-native";
+import { TextInput, View } from "react-native";
 
 import { Button } from "~/components/ui/button";
 import Text from "~/components/ui/text";
@@ -26,6 +26,7 @@ export default function HomeScreen() {
       <Button onPress={() => setTheme("system")} variant="secondary" size="sm">
         <Text>System</Text>
       </Button>
+      <TextInput placeholder="Enter your name" />
     </View>
   );
 }
