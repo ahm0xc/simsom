@@ -1,6 +1,7 @@
-import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { scale } from "react-native-size-matters";
+
+import Icon from "~/components/icon";
 
 type Tab = {
   name: string;
@@ -12,30 +13,24 @@ type Tab = {
 const TABS: Tab[] = [
   {
     name: "index",
-    icon: ({ color, size }) => (
-      <Ionicons name="home" size={size} color={color} />
-    ),
+    icon: ({ color, size }) => <Icon name="home" color={color} size={size} />,
     label: "Home",
   },
   {
     name: "explore",
     icon: ({ color, size }) => (
-      <Ionicons name="search" size={size} color={color} />
+      <Icon name="compass" color={color} size={size} />
     ),
     label: "Explore",
   },
   {
     name: "chats/index",
-    icon: ({ color, size }) => (
-      <Ionicons name="chatbox" size={size} color={color} />
-    ),
+    icon: ({ color, size }) => <Icon name="chat" color={color} size={size} />,
     label: "Message",
   },
   {
     name: "profile",
-    icon: ({ color, size }) => (
-      <Ionicons name="person" size={size} color={color} />
-    ),
+    icon: ({ color, size }) => <Icon name="user" color={color} size={size} />,
     label: "Profile",
   },
   {
