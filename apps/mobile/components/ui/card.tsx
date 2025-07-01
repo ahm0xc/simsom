@@ -13,10 +13,7 @@ function Card({
 }) {
   return (
     <View
-      className={cn(
-        "rounded-3xl border border-border bg-card shadow-sm shadow-foreground/10",
-        className
-      )}
+      className={cn("rounded-3xl border border-border bg-card", className)}
       {...props}
     />
   );
