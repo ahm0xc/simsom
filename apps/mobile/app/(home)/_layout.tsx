@@ -49,6 +49,7 @@ export default function HomeLayout() {
   return (
     <Tabs
       screenOptions={{
+        headerShown: false,
         animation: "fade",
         tabBarLabelPosition: "below-icon",
         tabBarItemStyle: {
