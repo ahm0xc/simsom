@@ -14,6 +14,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 
+import StatusbarBackdropFade from "~/components/statusbar-backdrop-fade";
 import useTheme from "~/hooks/use-theme";
 import { NAV_THEME } from "~/lib/constants";
 import { FONTS } from "~/lib/fonts";
@@ -77,6 +78,7 @@ export default function RootLayout() {
     <TRPCProvider>
       <ThemeProvider value={isDarkTheme ? DARK_THEME : LIGHT_THEME}>
         <StatusBar style={isDarkTheme ? "light" : "dark"} />
+        <StatusbarBackdropFade />
         <Stack screenOptions={{ headerShown: false }} />
         <PortalHost />
       </ThemeProvider>

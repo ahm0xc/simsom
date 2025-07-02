@@ -26,8 +26,8 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
 
   return (
-    <View className="flex-1" style={{ paddingTop: insets.top }}>
-      <ScrollView className="flex-1">
+    <View className="flex-1">
+      <ScrollView className="flex-1" style={{ paddingTop: insets.top }}>
         <Header />
         <View className="flex-1 p-4">
           <PostCreateSection />
