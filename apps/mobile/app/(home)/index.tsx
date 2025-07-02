@@ -21,9 +21,11 @@ import {
 } from "~/components/ui/dropdown-menu";
 import Image from "~/components/ui/image";
 import Text from "~/components/ui/text";
+import { useAppScaleStore } from "~/hooks/use-app-scale";
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
+  const { scaleDown, resetScale } = useAppScaleStore();
 
   return (
     <View className="flex-1">

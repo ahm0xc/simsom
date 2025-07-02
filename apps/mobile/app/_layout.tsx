@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 
 import {
   DarkTheme,
@@ -14,6 +14,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 
+import AppScaleProvider from "~/components/providers/app-scale-provider";
 import StatusbarBackdropFade from "~/components/statusbar-backdrop-fade";
 import useTheme from "~/hooks/use-theme";
 import { NAV_THEME } from "~/lib/constants";
@@ -74,12 +75,21 @@ export default function RootLayout() {
     return null;
   }
 
+  const theme = isDarkTheme ? DARK_THEME : LIGHT_THEME;
+
   return (
     <TRPCProvider>
-      <ThemeProvider value={isDarkTheme ? DARK_THEME : LIGHT_THEME}>
+      <ThemeProvider value={theme}>
         <StatusBar style={isDarkTheme ? "light" : "dark"} />
         <StatusbarBackdropFade />
-        <Stack screenOptions={{ headerShown: false }} />
+        <View
+          className="flex-1"
+          style={{ backgroundColor: theme.colors.background }}
+        >
+          <AppScaleProvider>
+            <Stack screenOptions={{ headerShown: false }} />
+          </AppScaleProvider>
+        </View>
         <PortalHost />
       </ThemeProvider>
     </TRPCProvider>

@@ -21,6 +21,7 @@ import Animated, {
 
 import Icon from "~/components/icon";
 import { TextClassContext } from "~/components/ui/text";
+import { useAppScaleStore } from "~/hooks/use-app-scale";
 import { cn } from "~/lib/utils";
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
@@ -129,13 +130,12 @@ function DropdownMenuContent({
   portalHost?: string;
 }) {
   const { open } = DropdownMenuPrimitive.useRootContext();
+  const { setScale, resetScale } = useAppScaleStore();
 
-  // Animation values for native platforms
   const opacity = useSharedValue(0);
   const scale = useSharedValue(0.95);
   const blurIntensity = useSharedValue(0);
 
-  // Animate when open state changes
   React.useEffect(() => {
     if (Platform.OS !== "web") {
       if (open) {
@@ -153,7 +153,14 @@ function DropdownMenuContent({
     }
   }, [open, opacity, scale, blurIntensity]);
 
-  // Animated style for native platforms
+  React.useEffect(() => {
+    if (open) {
+      setScale(0.95, 100);
+    } else {
+      resetScale(100);
+    }
+  }, [open, setScale, resetScale]);
+
   const animatedContentStyle = useAnimatedStyle(() => {
     if (Platform.OS === "web") return {};
 
@@ -163,21 +170,16 @@ function DropdownMenuContent({
     };
   });
 
-  // Animated blur opacity style
   const animatedBlurStyle = useAnimatedStyle(() => {
     return {
       opacity: opacity.value,
     };
   });
 
-  // Content component - animated on native, regular on web
   const ContentComponent =
     Platform.OS === "web"
       ? DropdownMenuPrimitive.Content
       : Animated.createAnimatedComponent(DropdownMenuPrimitive.Content);
-
-  // For now, let's use a simpler approach with animated opacity
-  // We can try the animated props approach later if needed
 
   return (
     <DropdownMenuPrimitive.Portal hostName={portalHost}>
