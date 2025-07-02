@@ -6,6 +6,7 @@ import Animated, { FadeIn } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import Icon from "~/components/icon";
+import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import {
   DropdownMenu,
@@ -20,12 +21,11 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import Image from "~/components/ui/image";
+import { Input } from "~/components/ui/input";
 import Text from "~/components/ui/text";
-import { useAppScaleStore } from "~/hooks/use-app-scale";
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
-  const { scaleDown, resetScale } = useAppScaleStore();
 
   return (
     <View className="flex-1">
@@ -105,9 +105,11 @@ function Header() {
 }
 
 function PostCreateSection() {
+  const [content, setContent] = React.useState("");
+
   return (
     <Card className="p-4">
-      <View className="flex-row items-center gap-2">
+      <View className="flex-row items-start gap-2">
         <Image
           source={{
             uri: "https://github.com/ahm0xc.png?size=200",
@@ -119,24 +121,38 @@ function PostCreateSection() {
           }}
           contentFit="cover"
         />
-        <Text className="text-lg font-semibold text-muted-foreground">
-          What's on your mind?
-        </Text>
+        <Input
+          className="text-lg font-medium flex-1 bg-transparent border-transparent max-h-[200px]"
+          value={content}
+          onChangeText={setContent}
+          placeholder="What's on your mind?"
+          autoGrow
+        />
       </View>
-      <View className="flex-row items-center gap-2 mt-6">
-        <View className="bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-900/30 rounded-full p-2 h-9 items-center flex-row gap-2 pr-3">
-          <Icon name="image" size={20} color="#22c55e" />
-          <Text className="text-[13px] text-green-500 font-semibold">
-            Image
-          </Text>
+      <View className="mt-6 flex-row items-center justify-between">
+        <View className="flex-row items-center gap-2">
+          <View className="bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-900/30 rounded-full p-2 h-9 items-center flex-row gap-2 pr-3">
+            <Icon name="image" size={20} color="#22c55e" />
+            <Text className="text-[13px] text-green-500 font-semibold">
+              Image
+            </Text>
+          </View>
+          <View className="bg-blue-100 dark:bg-blue-900/20 border border-blue-300 dark:border-blue-900/30 rounded-full p-2 h-9 items-center flex-row gap-2 pr-3">
+            <Icon name="video" size={18} color="#3b82f6" />
+            <Text className="text-[13px] text-blue-500 font-semibold">
+              Video
+            </Text>
+          </View>
         </View>
-        <View className="bg-blue-100 dark:bg-blue-900/20 border border-blue-300 dark:border-blue-900/30 rounded-full p-2 h-9 items-center flex-row gap-2 pr-3">
-          <Icon name="video" size={20} color="#3b82f6" />
-          <Text className="text-[13px] text-blue-500 font-semibold">Video</Text>
-        </View>
-        <View className="bg-pink-100 dark:bg-pink-900/20 border border-pink-300 dark:border-pink-900/30 rounded-full p-2 h-9 items-center flex-row gap-2 pr-3">
-          <Icon name="music-note" size={20} color="#ec4899" />
-          <Text className="text-[13px] text-pink-500 font-semibold">Audio</Text>
+        <View className="flex-row items-center gap-2">
+          <Button
+            size="sm"
+            className="flex-row items-center gap-2 rounded-full"
+            disabled={content.trim().length === 0}
+          >
+            <Icon name="sent" size={18} color="#000" />
+            <Text className="text-[13px] font-semibold">Post</Text>
+          </Button>
         </View>
       </View>
     </Card>
