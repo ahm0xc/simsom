@@ -2,15 +2,29 @@ import React from "react";
 
 import { ScrollView, TouchableOpacity, View } from "react-native";
 
+import Animated, { FadeIn } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import Icon from "~/components/icon";
 import { Card } from "~/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 import Image from "~/components/ui/image";
 import Text from "~/components/ui/text";
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
+
   return (
     <View className="flex-1" style={{ paddingTop: insets.top }}>
       <ScrollView className="flex-1">
@@ -140,6 +154,8 @@ interface PostCardProps {
 }
 
 function PostCard({ user, content, likes, comments, shares }: PostCardProps) {
+  const insets = useSafeAreaInsets();
+
   return (
     <Card className="p-4">
       <View className="flex-row items-start justify-between gap-2">
@@ -168,9 +184,49 @@ function PostCard({ user, content, likes, comments, shares }: PostCardProps) {
           </View>
         </View>
         <View>
-          <TouchableOpacity className="h-8 w-8 flex items-center justify-center rounded-full">
-            <Icon name="more-horizontal-circle" size={20} color="#666" />
-          </TouchableOpacity>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <TouchableOpacity className="h-8 w-8 flex items-center justify-center rounded-full">
+                <Icon name="more-horizontal-circle" size={20} color="#666" />
+              </TouchableOpacity>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-64 native:w-72" insets={insets}>
+              <DropdownMenuLabel>Options</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <Text>Edit</Text>
+                </DropdownMenuItem>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>
+                    <Text>Invite users</Text>
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuSubContent>
+                    <Animated.View entering={FadeIn.duration(200)}>
+                      <DropdownMenuItem>
+                        <Text>Email</Text>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Text>Message</Text>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <Text>More...</Text>
+                      </DropdownMenuItem>
+                    </Animated.View>
+                  </DropdownMenuSubContent>
+                </DropdownMenuSub>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem disabled>
+                <Text>API</Text>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="destructive">
+                <Text>Delete</Text>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </View>
       </View>
       <View className="mt-4">

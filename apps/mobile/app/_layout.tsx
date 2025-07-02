@@ -8,6 +8,7 @@ import {
   Theme,
   ThemeProvider,
 } from "@react-navigation/native";
+import { PortalHost } from "@rn-primitives/portal";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -77,6 +78,7 @@ export default function RootLayout() {
       <ThemeProvider value={isDarkTheme ? DARK_THEME : LIGHT_THEME}>
         <StatusBar style={isDarkTheme ? "light" : "dark"} />
         <Stack screenOptions={{ headerShown: false }} />
+        <PortalHost />
       </ThemeProvider>
     </TRPCProvider>
   );
