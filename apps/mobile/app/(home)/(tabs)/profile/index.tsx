@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ScrollView, View } from "react-native";
+import { Linking, Pressable, ScrollView, View } from "react-native";
 
 import { BlurView } from "expo-blur";
 import { useRouter } from "expo-router";
@@ -9,6 +9,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Icon from "~/components/icon";
 import { Button } from "~/components/ui/button";
 import Image from "~/components/ui/image";
+import Text from "~/components/ui/text";
 
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
@@ -54,7 +55,7 @@ function ProfileHeader() {
               onPress={handleBack}
               className="rounded-full bg-transparent w-full h-full p-0"
             >
-              <Icon name="chevron-left" color="#f5f5f5" size={26} />
+              <Icon name="chevron-left" color="#f5f5f5" size={24} />
             </Button>
           </BlurView>
         </View>
@@ -70,12 +71,12 @@ function ProfileHeader() {
             overflow: "hidden",
           }}
         >
-          <BlurView intensity={50} className="w-full h-full" tint="extraLight">
+          <BlurView intensity={50} className="w-full h-full" tint="light">
             <Button
               onPress={handleSettings}
               className="rounded-full bg-transparent w-full h-full p-0"
             >
-              <Icon name="settings" color="#f5f5f5" size={26} />
+              <Icon name="settings" color="#f5f5f5" size={22} />
             </Button>
           </BlurView>
         </View>
@@ -91,8 +92,8 @@ function ProfileHeader() {
         contentFit="cover"
         aria-label="Profile Banner"
       />
-      <View className="flex-row items-center justify-between px-4">
-        <View>
+      <View className="flex-row justify-end px-4 items-start relative">
+        <View className="absolute left-2">
           <View
             className="rounded-full h-fit w-fit border-2 border-primary p-0.5 bg-background"
             style={{ transform: [{ translateY: -50 }] }}
@@ -107,7 +108,52 @@ function ProfileHeader() {
             />
           </View>
         </View>
-        <View></View>
+        <View className="gap-2" style={{ transform: [{ translateY: -20 }] }}>
+          <View className="w-fit bg-background p-0.5 rounded-full border-2 border-primary">
+            <Button className="rounded-full">
+              <Text>Follow</Text>
+            </Button>
+          </View>
+          <View className="flex-row items-center gap-4">
+            <Text font="sans-semibold" className="text-sm">
+              9 Following
+            </Text>
+            <Text font="sans-semibold" className="text-sm">
+              10.8k Followers
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View className="px-4 mt-4">
+        <View className="flex-row items-center gap-2">
+          <Text className="text-2xl font-semibold">Ahm0xc</Text>
+          <Icon name="verified-badge" size={20} />
+        </View>
+        <Text className="text-sm text-muted-foreground">@ahm0xc</Text>
+        <Text className="text-base font-medium mt-4">
+          I teach, push and inspire people to code and build things beyond the
+          screen.
+        </Text>
+      </View>
+      <View className="px-4 mt-6 gap-3">
+        <View className="flex-row gap-2">
+          <Icon name="globe" size={18} color="darkgray" darkColor="gray" />
+          <Pressable onPress={() => Linking.openURL("https://ahm0xc.me")}>
+            <Text className="font-medium text-sm text-muted-foreground">
+              ahm0xc.me
+            </Text>
+          </Pressable>
+        </View>
+        <View className="flex-row gap-2">
+          <Icon name="calendar" size={18} color="darkgray" darkColor="gray" />
+          <Text className="text-sm text-muted-foreground">
+            Joined July 2024
+          </Text>
+        </View>
+        <View className="flex-row gap-2">
+          <Icon name="location" size={18} color="darkgray" darkColor="gray" />
+          <Text className="text-sm text-muted-foreground">Bangladesh</Text>
+        </View>
       </View>
     </View>
   );
