@@ -17,6 +17,7 @@ import MoreHorizontalCircleIcon from "~/assets/icons/more-horizontal-circle.svg"
 import MoreHorizontalIcon from "~/assets/icons/more-horizontal.svg";
 import MusicNoteIcon from "~/assets/icons/music-note.svg";
 import SentIcon from "~/assets/icons/sent.svg";
+import SettingsIcon from "~/assets/icons/settings.svg";
 import TickIcon from "~/assets/icons/tick.svg";
 import UserIcon from "~/assets/icons/user.svg";
 import VideoIcon from "~/assets/icons/video.svg";
@@ -41,6 +42,7 @@ const ICONS = {
   "chevron-down": ChevronDownIcon,
   "chevron-right": ChevronRightIcon,
   "chevron-left": ChevronLeftIcon,
+  settings: SettingsIcon,
 };
 
 export type IconProps = SvgProps & {
