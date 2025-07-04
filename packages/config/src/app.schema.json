@@ -54,9 +54,12 @@
         },
         "scheme": {
           "type": "string"
+        },
+        "bundleIdentifier": {
+          "type": "string"
         }
       },
-      "required": ["name", "slug", "version", "scheme"]
+      "required": ["name", "slug", "version", "scheme", "bundleIdentifier"]
     }
   },
   "required": [

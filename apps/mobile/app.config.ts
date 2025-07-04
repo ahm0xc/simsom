@@ -14,6 +14,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   newArchEnabled: true,
   ios: {
     supportsTablet: true,
+    bundleIdentifier: appConfig.native.bundleIdentifier,
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+    },
   },
   android: {
     adaptiveIcon: {
@@ -21,6 +25,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       backgroundColor: "#ffffff",
     },
     edgeToEdgeEnabled: true,
+    package: appConfig.native.bundleIdentifier,
   },
   plugins: [
     "expo-router",
@@ -39,5 +44,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   experiments: {
     typedRoutes: true,
     reactCompiler: true,
+  },
+  extra: {
+    eas: {
+      projectId: "39e65e18-381a-498e-a1c2-b13d1f704b90",
+    },
   },
 });

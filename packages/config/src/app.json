@@ -13,6 +13,7 @@
     "name": "SimSom",
     "slug": "simsom",
     "version": "1.0.0",
-    "scheme": "simsom"
+    "scheme": "simsom",
+    "bundleIdentifier": "io.somossa.simsom"
   }
 }
