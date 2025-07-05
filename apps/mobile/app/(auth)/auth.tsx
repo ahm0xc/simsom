@@ -30,7 +30,7 @@ WebBrowser.maybeCompleteAuthSession();
  *
  * @returns The rendered login screen React element.
  */
-export default function LoginScreen() {
+export default function AuthScreen() {
   const logoOpacity = useSharedValue(0);
   const logoTranslateY = useSharedValue(-20);
 
@@ -204,7 +204,7 @@ interface OAuthButtonProps {
   label: string;
   provider: "google" | "apple";
   isPrimary?: boolean;
-  animatedStyle?: any;
+  animatedStyle?: ReturnType<typeof useAnimatedStyle>;
 }
 const getStrategy = (provider: OAuthButtonProps["provider"]) => {
   if (provider === "google") {
@@ -237,8 +237,6 @@ function OAuthButton({
 
   const { isDarkTheme } = useTheme();
 
-  useWarmUpBrowser();
-
   const { startOAuthFlow } = useOAuth({
     strategy: getStrategy(provider),
   });
@@ -250,9 +248,15 @@ function OAuthButton({
     try {
       setIsLoading(true);
 
+      const scheme = Constants.expoConfig?.scheme as string | undefined;
+
+      if (!scheme) {
+        throw new Error("No app scheme found");
+      }
+
       const { createdSessionId, setActive } = await startOAuthFlow({
         redirectUrl: Linking.createURL("/", {
-          scheme: Constants.expoConfig?.scheme as string,
+          scheme,
         }),
       });
 
@@ -271,10 +275,10 @@ function OAuthButton({
     } finally {
       setIsLoading(false);
     }
-  }, [provider, isPrimary, startOAuthFlow, user]);
+  }, [startOAuthFlow, user]);
 
   return (
-    <Animated.View style={animatedStyle}>
+    <Animated.View style={animatedStyle as any}>
       <Button
         onPress={handleSignIn}
         disabled={isLoading}

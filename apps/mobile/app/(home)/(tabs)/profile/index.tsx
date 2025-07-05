@@ -109,7 +109,9 @@ function ProfileHeader() {
             style={{ transform: [{ translateY: -50 }] }}
           >
             <Image
-              source={{ uri: user?.imageUrl }}
+              source={{
+                uri: user?.imageUrl || "https://via.placeholder.com/100",
+              }}
               style={{
                 width: 100,
                 height: 100,
@@ -136,7 +138,9 @@ function ProfileHeader() {
       </View>
       <View className="px-4 mt-4">
         <View className="flex-row items-center gap-2">
-          <Text className="text-2xl font-semibold">{user?.fullName}</Text>
+          <Text className="text-2xl font-semibold">
+            {user?.fullName || "Guest User"}
+          </Text>
           <Icon name="verified-badge" size={20} />
         </View>
         <Text className="text-sm text-muted-foreground">@ahm0xc</Text>

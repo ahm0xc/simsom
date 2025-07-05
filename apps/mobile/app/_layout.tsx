@@ -67,8 +67,8 @@ const InitialLayout = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const publicRoutes = React.useMemo(() => ["/auth"], []);
-  const authRoutes = React.useMemo(() => ["/auth"], []);
+  const publicRoutes = React.useMemo(() => ["/some-public-route"], []); // Routes accessible without auth
+  const authRoutes = React.useMemo(() => ["/auth"], []); // Routes only for non-authenticated users
 
   React.useEffect(() => {
     if (!isLoaded) {
@@ -88,7 +88,7 @@ const InitialLayout = () => {
     }
 
     setIsProcessing(false);
-  }, [isSignedIn, isLoaded, pathname, router, publicRoutes]);
+  }, [isSignedIn, isLoaded, pathname, router, publicRoutes, authRoutes]);
 
   if (isProcessing) {
     return null;
