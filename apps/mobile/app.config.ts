@@ -13,6 +13,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   userInterfaceStyle: "automatic",
   newArchEnabled: true,
   ios: {
+    usesAppleSignIn: true,
     supportsTablet: true,
     bundleIdentifier: appConfig.native.bundleIdentifier,
     infoPlist: {
@@ -40,6 +41,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ],
     "expo-web-browser",
     "expo-font",
+    "expo-secure-store",
   ],
   experiments: {
     typedRoutes: true,

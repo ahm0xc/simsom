@@ -2,6 +2,7 @@ import React from "react";
 
 import { Linking, Pressable, ScrollView, View } from "react-native";
 
+import { useUser } from "@clerk/clerk-expo";
 import { BlurView } from "expo-blur";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -11,9 +12,12 @@ import { Button } from "~/components/ui/button";
 import Image from "~/components/ui/image";
 import Text from "~/components/ui/text";
 
+/**
+ * Displays the user's profile screen with a scrollable header section.
+ *
+ * Renders the `ProfileHeader` component inside a scrollable view, occupying the full screen.
+ */
 export default function ProfileScreen() {
-  const insets = useSafeAreaInsets();
-
   return (
     <View className="flex-1 w-full">
       <ScrollView className="flex-1">
@@ -23,9 +27,15 @@ export default function ProfileScreen() {
   );
 }
 
+/**
+ * Displays the user's profile header with navigation controls, banner, profile image, user details, and action buttons.
+ *
+ * Shows the authenticated user's profile image and full name, along with static username, bio, website link, join date, and location. Includes buttons for navigating back and accessing settings.
+ */
 function ProfileHeader() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const { user } = useUser();
 
   const handleBack = () => {
     router.back();
@@ -99,7 +109,9 @@ function ProfileHeader() {
             style={{ transform: [{ translateY: -50 }] }}
           >
             <Image
-              source={{ uri: "https://github.com/ahm0xc.png" }}
+              source={{
+                uri: user?.imageUrl || "https://via.placeholder.com/100",
+              }}
               style={{
                 width: 100,
                 height: 100,
@@ -126,7 +138,9 @@ function ProfileHeader() {
       </View>
       <View className="px-4 mt-4">
         <View className="flex-row items-center gap-2">
-          <Text className="text-2xl font-semibold">Ahm0xc</Text>
+          <Text className="text-2xl font-semibold">
+            {user?.fullName || "Guest User"}
+          </Text>
           <Icon name="verified-badge" size={20} />
         </View>
         <Text className="text-sm text-muted-foreground">@ahm0xc</Text>
