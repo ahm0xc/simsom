@@ -12,6 +12,11 @@ import { Button } from "~/components/ui/button";
 import Image from "~/components/ui/image";
 import Text from "~/components/ui/text";
 
+/**
+ * Displays the user's profile screen with a scrollable header section.
+ *
+ * Renders the `ProfileHeader` component inside a scrollable view, occupying the full screen.
+ */
 export default function ProfileScreen() {
   return (
     <View className="flex-1 w-full">
@@ -22,6 +27,11 @@ export default function ProfileScreen() {
   );
 }
 
+/**
+ * Displays the user's profile header with navigation controls, banner, profile image, user details, and action buttons.
+ *
+ * Shows the authenticated user's profile image and full name, along with static username, bio, website link, join date, and location. Includes buttons for navigating back and accessing settings.
+ */
 function ProfileHeader() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
