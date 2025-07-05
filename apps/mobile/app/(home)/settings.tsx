@@ -2,6 +2,7 @@ import React from "react";
 
 import { View } from "react-native";
 
+import { useAuth } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -13,6 +14,7 @@ import { api } from "~/trpc/client";
 export default function SettingsScreen() {
   const { data } = api.example.hello.useQuery({ text: "client" });
   const { toggleTheme, setTheme } = useTheme();
+  const { signOut } = useAuth();
 
   return (
     <SafeAreaView className="flex-1">
@@ -37,6 +39,9 @@ export default function SettingsScreen() {
         <Link href="/">
           <Text>Home</Text>
         </Link>
+        <Button onPress={() => signOut()}>
+          <Text>Sign Out</Text>
+        </Button>
       </View>
     </SafeAreaView>
   );

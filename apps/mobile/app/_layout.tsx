@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Platform, View } from "react-native";
 
+import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import {
   DarkTheme,
   DefaultTheme,
@@ -10,7 +11,8 @@ import {
 } from "@react-navigation/native";
 import { PortalHost } from "@rn-primitives/portal";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Slot, usePathname, useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 
@@ -22,7 +24,7 @@ import { FONTS } from "~/lib/fonts";
 import "~/styles/globals.css";
 import { TRPCProvider } from "~/trpc/provider";
 
-export { ErrorBoundary } from "expo-router";
+// export { ErrorBoundary } from "expo-router";
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -34,6 +36,66 @@ const DARK_THEME: Theme = {
 };
 
 SplashScreen.preventAutoHideAsync();
+
+const tokenCache = {
+  async getToken(key: string) {
+    try {
+      return SecureStore.getItemAsync(key);
+    } catch (err) {
+      return null;
+    }
+  },
+  async saveToken(key: string, value: string) {
+    try {
+      return SecureStore.setItemAsync(key, value);
+    } catch (err) {
+      return;
+    }
+  },
+};
+
+const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+if (!CLERK_PUBLISHABLE_KEY) {
+  throw new Error("Missing Clerk publishable key");
+}
+
+const InitialLayout = () => {
+  const [isProcessing, setIsProcessing] = React.useState(true);
+
+  const { isSignedIn, isLoaded } = useAuth();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const publicRoutes = React.useMemo(() => ["/auth"], []);
+  const authRoutes = React.useMemo(() => ["/auth"], []);
+
+  React.useEffect(() => {
+    if (!isLoaded) {
+      return;
+    }
+
+    if (isSignedIn && authRoutes.includes(pathname)) {
+      router.replace("/");
+    }
+
+    if (
+      !isSignedIn &&
+      !authRoutes.includes(pathname) &&
+      !publicRoutes.includes(pathname)
+    ) {
+      router.replace("/auth");
+    }
+
+    setIsProcessing(false);
+  }, [isSignedIn, isLoaded, pathname, router, publicRoutes]);
+
+  if (isProcessing) {
+    return null;
+  }
+
+  return <Slot />;
+};
 
 export default function RootLayout() {
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
@@ -78,21 +140,26 @@ export default function RootLayout() {
   const theme = isDarkTheme ? DARK_THEME : LIGHT_THEME;
 
   return (
-    <TRPCProvider>
-      <ThemeProvider value={theme}>
-        <StatusBar style={isDarkTheme ? "light" : "dark"} />
-        <StatusbarBackdropFade />
-        <View
-          className="flex-1"
-          style={{ backgroundColor: theme.colors.background }}
-        >
-          <AppScaleProvider>
-            <Stack screenOptions={{ headerShown: false }} />
-          </AppScaleProvider>
-        </View>
-        <PortalHost />
-      </ThemeProvider>
-    </TRPCProvider>
+    <ClerkProvider
+      publishableKey={CLERK_PUBLISHABLE_KEY}
+      tokenCache={tokenCache}
+    >
+      <TRPCProvider>
+        <ThemeProvider value={theme}>
+          <StatusBar style={isDarkTheme ? "light" : "dark"} />
+          <StatusbarBackdropFade />
+          <View
+            className="flex-1"
+            style={{ backgroundColor: theme.colors.background }}
+          >
+            <AppScaleProvider>
+              <InitialLayout />
+            </AppScaleProvider>
+          </View>
+          <PortalHost />
+        </ThemeProvider>
+      </TRPCProvider>
+    </ClerkProvider>
   );
 }
 

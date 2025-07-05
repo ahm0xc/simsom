@@ -2,6 +2,7 @@ import React from "react";
 
 import { Linking, Pressable, ScrollView, View } from "react-native";
 
+import { useUser } from "@clerk/clerk-expo";
 import { BlurView } from "expo-blur";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -12,8 +13,6 @@ import Image from "~/components/ui/image";
 import Text from "~/components/ui/text";
 
 export default function ProfileScreen() {
-  const insets = useSafeAreaInsets();
-
   return (
     <View className="flex-1 w-full">
       <ScrollView className="flex-1">
@@ -26,6 +25,7 @@ export default function ProfileScreen() {
 function ProfileHeader() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const { user } = useUser();
 
   const handleBack = () => {
     router.back();
@@ -99,7 +99,7 @@ function ProfileHeader() {
             style={{ transform: [{ translateY: -50 }] }}
           >
             <Image
-              source={{ uri: "https://github.com/ahm0xc.png" }}
+              source={{ uri: user?.imageUrl }}
               style={{
                 width: 100,
                 height: 100,
@@ -126,7 +126,7 @@ function ProfileHeader() {
       </View>
       <View className="px-4 mt-4">
         <View className="flex-row items-center gap-2">
-          <Text className="text-2xl font-semibold">Ahm0xc</Text>
+          <Text className="text-2xl font-semibold">{user?.fullName}</Text>
           <Icon name="verified-badge" size={20} />
         </View>
         <Text className="text-sm text-muted-foreground">@ahm0xc</Text>
