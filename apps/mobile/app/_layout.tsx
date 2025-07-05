@@ -97,6 +97,13 @@ const InitialLayout = () => {
   return <Slot />;
 };
 
+/**
+ * Sets up the root layout for the app, providing authentication, theming, font loading, and global providers.
+ *
+ * Waits for custom fonts and color scheme to load before rendering the app content. Wraps the app with Clerk authentication, TRPC, and navigation theme providers, and manages the status bar and background styling.
+ *
+ * Returns `null` until fonts and color scheme are ready.
+ */
 export default function RootLayout() {
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
   const hasMounted = React.useRef(false);

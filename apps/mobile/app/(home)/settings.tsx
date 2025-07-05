@@ -11,6 +11,11 @@ import Text from "~/components/ui/text";
 import useTheme from "~/hooks/use-theme";
 import { api } from "~/trpc/client";
 
+/**
+ * Displays the settings screen with theme controls, a greeting message, navigation, and user sign-out functionality.
+ *
+ * Provides options to toggle the app theme, set the theme to system default, view a personalized greeting, navigate to the home screen, and sign out of the user account.
+ */
 export default function SettingsScreen() {
   const { data } = api.example.hello.useQuery({ text: "client" });
   const { toggleTheme, setTheme } = useTheme();

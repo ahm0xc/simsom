@@ -23,6 +23,13 @@ import useTheme from "~/hooks/use-theme";
 
 WebBrowser.maybeCompleteAuthSession();
 
+/**
+ * Displays the animated login screen with app branding, a background image, welcome text, and OAuth sign-in buttons for Google and Apple.
+ *
+ * Animates the entrance of the logo, image, title, and authentication buttons in a staggered sequence. Integrates OAuth authentication using Clerk and Expo, and preloads the web browser for a smoother sign-in experience.
+ *
+ * @returns The rendered login screen React element.
+ */
 export default function LoginScreen() {
   const logoOpacity = useSharedValue(0);
   const logoTranslateY = useSharedValue(-20);
@@ -208,6 +215,17 @@ const getStrategy = (provider: OAuthButtonProps["provider"]) => {
   return "oauth_google";
 };
 
+/**
+ * Renders an animated OAuth sign-in button for a specified provider.
+ *
+ * Displays a button with an icon and label, handles the OAuth authentication flow for the given provider, and shows a loading indicator during authentication. The button's appearance adapts to the app's theme and can be styled as primary or outlined.
+ *
+ * @param iconName - The name of the icon to display on the button.
+ * @param label - The text label for the button.
+ * @param provider - The OAuth provider ("google" or "apple").
+ * @param isPrimary - Whether the button uses the primary style.
+ * @param animatedStyle - Optional animated style for the button container.
+ */
 function OAuthButton({
   iconName,
   label,
