@@ -52,6 +52,9 @@ export default function TabsLayout() {
         headerShown: false,
         animation: "fade",
         tabBarLabelPosition: "below-icon",
+        tabBarIconStyle: {
+          marginInline: "auto",
+        },
         tabBarItemStyle: {
           flexDirection: "row",
           alignItems: "center",
