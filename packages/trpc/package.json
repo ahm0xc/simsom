@@ -16,9 +16,9 @@
   "dependencies": {
     "@repo/typescript-config": "workspace:*",
     "superjson": "^2.2.2",
-    "zod": "^3.22.4"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
-    "typescript": "^5.3.3"
+    "typescript": "^5.9.3"
   }
 }
