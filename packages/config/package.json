@@ -1,14 +1,19 @@
 {
   "name": "@repo/config",
   "version": "0.0.1",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
   "exports": {
-    "./app": "./src/app.ts",
+    "./app": {
+      "types": "./src/app.ts",
+      "default": "./dist/app.js"
+    },
     "./app.json": "./src/app.json"
   },
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@repo/typescript-config": "workspace:*"
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "latest"
   }
 }

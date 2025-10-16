@@ -1,5 +1,5 @@
-import { exampleRouter } from "./routers/example";
-import { createCallerFactory, createTRPCRouter } from "./trpc";
+import { exampleRouter } from "./routers/example.js";
+import { createCallerFactory, createTRPCRouter } from "./trpc.js";
 
 /**
  * This is the primary router for your server.

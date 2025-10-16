@@ -73,7 +73,7 @@ export default function TabsLayout() {
             animation: "spring",
           },
         },
-        tabBarButton: (props) => <CustomTabButton {...props} />,
+        tabBarButton: (props: any) => <CustomTabButton {...props} />,
       }}
     >
       {TABS.map((tab) => (
@@ -95,8 +95,8 @@ const CustomTabButton = React.forwardRef<any, any>((props, ref) => {
   const { children, ...restProps } = props;
   return (
     <Pressable
-      ref={ref}
       {...restProps}
+      ref={ref as any}
       android_ripple={{ color: "transparent" }}
       style={({ pressed }) => [props.style, pressed && { opacity: 0.7 }]}
     >

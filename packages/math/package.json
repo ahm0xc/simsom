@@ -1,13 +1,22 @@
 {
   "name": "@repo/math",
-  "version": "0.0.1",
-  "exports": {
-    ".": "./index.ts"
-  },
+  "type": "module",
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "dev": "tsc --watch",
+    "build": "tsc"
   },
-  "dependencies": {
-    "@repo/typescript-config": "workspace:*"
+  "exports": {
+    "./add": {
+      "types": "./src/add.ts",
+      "default": "./dist/add.js"
+    },
+    "./subtract": {
+      "types": "./src/subtract.ts",
+      "default": "./dist/subtract.js"
+    }
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "latest"
   }
 }

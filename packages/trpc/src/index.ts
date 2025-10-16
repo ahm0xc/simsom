@@ -1,2 +1,2 @@
-export { appRouter, type AppRouter } from "./root";
-export { publicProcedure } from "./trpc";
+export { appRouter, type AppRouter } from "./root.js";
+export { publicProcedure } from "./trpc.js";

@@ -10,9 +10,6 @@ const config = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    reactCompiler: true,
-  },
 };
 
 export default config;
