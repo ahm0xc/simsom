@@ -1,21 +1,23 @@
 import { ConfigContext, ExpoConfig } from "expo/config";
 
-import appConfig from "@repo/config/app.json";
+const getIdentifier = () => {
+  return "io.somossa.simsom";
+};
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: appConfig.native.name,
-  slug: appConfig.native.slug,
-  version: appConfig.native.version,
+  name: "SimSom",
+  slug: "simsom",
+  version: "0.0.1",
   orientation: "portrait",
   icon: "./assets/images/icon.png",
-  scheme: appConfig.native.scheme,
+  scheme: "simsom",
   userInterfaceStyle: "automatic",
   newArchEnabled: true,
   ios: {
     usesAppleSignIn: true,
     supportsTablet: true,
-    bundleIdentifier: appConfig.native.bundleIdentifier,
+    bundleIdentifier: getIdentifier(),
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
     },
@@ -26,7 +28,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       backgroundColor: "#ffffff",
     },
     edgeToEdgeEnabled: true,
-    package: appConfig.native.bundleIdentifier,
+    package: getIdentifier(),
   },
   plugins: [
     "expo-router",
